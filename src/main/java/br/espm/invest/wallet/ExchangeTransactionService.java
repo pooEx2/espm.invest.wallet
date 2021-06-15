@@ -40,19 +40,19 @@ public class ExchangeTransactionService {
     public ExchangeTransaction buy(String idWallet, TransactionBean bean) {
         Wallet w = walletService.findBy(idWallet);
         if (w == null) {
-            throw new RuntimeException("Wallet does not exists: " + idWallet);
+            throw new RuntimeException("Wallet does not exist: " + idWallet);
         }
 
         Date now = new Date();
 
         Currency currency = exchangeController.currency(bean.getSymbol());
         if (currency == null) {
-            throw new RuntimeException("Currency does not exists: " + bean.getSymbol());
+            throw new RuntimeException("Currency does not exist: " + bean.getSymbol());
         }
 
         Quotation quotation = exchangeController.quotation(currency.getSymbol(), sdf.format(now));
         if (quotation == null) {
-            throw new RuntimeException("Quotation does not exists: " + sdf.format(now));
+            throw new RuntimeException("Quotation does not exist: " + sdf.format(now));
         }
 
         ExchangeTransaction et = new ExchangeTransaction();
@@ -69,19 +69,19 @@ public class ExchangeTransactionService {
     public ExchangeTransaction sell(String idWallet, TransactionBean bean) {
         Wallet w = walletService.findBy(idWallet);
         if (w == null) {
-            throw new RuntimeException("Wallet does not exists: " + idWallet);
+            throw new RuntimeException("Wallet does not exist: " + idWallet);
         }
 
         Date now = new Date();
 
         Currency currency = exchangeController.currency(bean.getSymbol());
         if (currency == null) {
-            throw new RuntimeException("Currency does not exists: " + bean.getSymbol());
+            throw new RuntimeException("Currency does not exist: " + bean.getSymbol());
         }
 
         Quotation quotation = exchangeController.quotation(currency.getSymbol(), sdf.format(now));
         if (quotation == null) {
-            throw new RuntimeException("Quotation does not exists: " + sdf.format(now));
+            throw new RuntimeException("Quotation does not exist: " + sdf.format(now));
         }
 
         if(bean.getLimit() > 0 && bean.getLimit() - quotation.getValue() > 0) {
